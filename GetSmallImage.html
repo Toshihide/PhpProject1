@@ -25,18 +25,23 @@
     <script type="text/javascript">
         $(function() {             
             $(document).ready(function(){                    
-                $('.products').append('<img src=\"DisplayProduct2.php?id=3\">');
-                $('.products').append('<img src=\"DisplayProduct2.php?id=3\">');
-                $('.products').append('<img src=\"DisplayProduct2.php?id=3\">');
-                $('.products').append('<img src=\"DisplayProduct2.php?id=3\">');
-                $('.products').append('<img src=\"DisplayProduct2.php?id=3\">');
-                
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\" alt> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\" alt> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
+                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
             });
         });
     </script>
 </HEAD>
 <BODY>
-    <div class ="products" id ="products">        
-    </div>
+    <ul class="thumbnails">
+        
+            <div class="products"></div>
+        
+    </ul>    
 </BODY>
 </HTML>
