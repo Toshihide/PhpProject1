@@ -3,11 +3,13 @@
 <HTML>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">-->
 <TITLE></TITLE>
 
     <script src="jquery.js" type="text/javascript"></script>
     <script src="jquery-ui.js" type="text/javascript"></script>        
     <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">        
+    <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
@@ -20,23 +22,27 @@
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>                        
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>                        
-
-    <meta http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+    
     <script type="text/javascript">
         $(function() {             
-            $(document).ready(function(){                    
-                for ( i = 0; i < 16; i++ )
-                {
-                    $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img src=\"DisplayProduct2.php?id=3\"> </a></li>');
-                }                
+            $(document).ready(function(){     
+                $.post( "GetItemData.php",
+                        {},
+                        function(data){
+                            for ( i = 0; i < data.length; i++ )                          
+                            {
+                                $('.thumbnails > .products').append('<li class="span3"><a href="#" class="thumbnail"> <img width="120" height="120" src=\"GetItemSmallImage.php?id=' + data[i]["ID"] + '\"> </a></li>');                                
+                            }                           
+                        },
+                        "json"
+                );
+               
+                $('.carousel').carousel();
             });
-            
-            $('.carousel').carousel();
         });
     </script>
 </HEAD>
-<BODY>
-    
+<BODY>    
     <div class="hero-unit">
         <h1>Image Viewer</h1>        
     </div>
@@ -62,37 +68,23 @@
       </div>
     </div>
 
-     <div class="span3">
+    
+    
+    
+     <div class="span4">
         <div class="well sidebar-nav">
+            
+            
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div>
-        
-    </div>
-  
+              <li class="nav-header">メニュー</li>
+              
+              <div class="container" >
+<!--    <div class="page-header">        
+    </div>    -->
+            <br>
     
     
     
-    <div class="container" >
-    <div class="page-header">        
-    </div>    
-    <br>
     <!-- The file upload form used as target for the file upload widget -->
     <form id="fileupload" action="server/php/" method="POST" enctype="multipart/form-data">
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -134,9 +126,39 @@
         <br>-->
         <!-- The table listing the files available for upload/download -->
         <!--<table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>-->
-    </form>
+<!--    </form>
     <br>    
 </div>
+              -->              
+              <li class="active"><a href="#">   
+                    <span class="btn btn-success fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Add files...</span>
+                    <input type="file" name="files[]" multiple="">
+                    </span>
+<!--                </span>
+                    <span class="btn btn-success fileinput-button">
+                    <input type="file" name="files[]" multiple>                    
+                    <i class="icon-plus icon-white"></i>                    
+                    </span>
+                    -->
+                <!--               <div class="span1"> 
+                <span class="btn btn-success fileinput-button">
+                    <input type="file" name="files[]" multiple>
+                    <i class="icon-plus icon-white"></i>
+                    <span>画像追加</span>
+                 </span>-->
+                </a>
+              </li>
+                
+                <br><br><br><br><br><br><br><br><br><br><br><br>               
+                </form>
+             </div>
+            </ul>            
+           </DIV>
+          </div>         
+    
+    
 <!-- modal-gallery is the modal dialog used for the image gallery -->
 <div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd">
     <div class="modal-header">
@@ -167,8 +189,7 @@
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <span>{%=locale.fileupload.start%}</span>
-    
+    <span>{%=locale.fileupload.start%}</span>    
 <!--
     <tr class="template-upload fade">
         <td class="preview"><span class="fade"></span></td>
